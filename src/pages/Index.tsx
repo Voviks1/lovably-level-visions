@@ -5,6 +5,7 @@ import { ArrowRight, Play, Star, CheckCircle, Phone, Calculator, Users, Award } 
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-interior.jpg";
 import beforeAfterImage from "@/assets/before-after.jpg";
+import { ApartmentTour } from "@/components/ApartmentTour/ApartmentTour";
 
 const Index = () => {
   const features = [
@@ -121,46 +122,41 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Before/After Section */}
+      {/* Interactive 3D Tour Section */}
       <section className="py-20 bg-gradient-to-br from-muted/30 to-accent/5">
         <div className="section-container">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold hero-text mb-6">
-              Трансформация пространств
+              Интерактивный 3D-тур
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Каждый проект — это история превращения обычного пространства 
-              в место, где хочется жить и творить
+              Погрузитесь в наш проект и пройдите по квартире от черновой отделки до финального результата. 
+              Посмотрите на трансформацию каждой комнаты своими глазами.
             </p>
-          </div>
-          
-          <div className="relative max-w-4xl mx-auto">
-            <div className="relative overflow-hidden rounded-3xl shadow-strong">
-              <img 
-                src={beforeAfterImage} 
-                alt="До и после ремонта" 
-                className="w-full h-96 md:h-[500px] object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-              
-              {/* Play Button Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Button
-                  size="lg"
-                  className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30 text-white"
-                >
-                  <Play className="w-8 h-8 ml-1" />
-                </Button>
+            <div className="flex flex-wrap justify-center gap-4 mt-6">
+              <div className="flex items-center text-muted-foreground">
+                <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
+                <span className="text-sm">Навигация между комнатами</span>
               </div>
-              
-              <div className="absolute bottom-6 left-6 text-white">
-                <Badge className="bg-white/10 text-white border-white/20 backdrop-blur-sm mb-2">
-                  3D-тур
-                </Badge>
-                <h3 className="text-xl font-bold">Современная квартира 85м²</h3>
-                <p className="text-white/90">Полная трансформация за 3 месяца</p>
+              <div className="flex items-center text-muted-foreground">
+                <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
+                <span className="text-sm">3 режима просмотра</span>
+              </div>
+              <div className="flex items-center text-muted-foreground">
+                <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
+                <span className="text-sm">360° обзор</span>
               </div>
             </div>
+          </div>
+          
+          <div className="max-w-6xl mx-auto">
+            <ApartmentTour />
+          </div>
+          
+          <div className="text-center mt-8">
+            <Badge className="bg-accent/10 text-accent border-accent/20">
+              Квартира 85м² • 3 месяца работ • Современный стиль
+            </Badge>
           </div>
         </div>
       </section>
