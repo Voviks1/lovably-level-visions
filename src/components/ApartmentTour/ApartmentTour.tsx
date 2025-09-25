@@ -8,7 +8,7 @@ import { Play, ArrowLeft, ArrowRight, RotateCcw, Home, MapPin } from 'lucide-rea
 import { RoomScene } from './RoomScene';
 import { NavigationPanel } from './NavigationPanel';
 
-export type RoomType = 'entrance' | 'living' | 'kitchen' | 'bedroom' | 'bathroom';
+export type RoomType = 'entrance' | 'living' | 'kitchen' | 'bathroom';
 export type ViewMode = 'before' | 'after' | 'process';
 
 interface Room {
@@ -21,7 +21,6 @@ const rooms: Room[] = [
   { id: 'entrance', name: 'Прихожая', description: 'Входная зона квартиры' },
   { id: 'living', name: 'Гостиная', description: 'Основная жилая зона' },
   { id: 'kitchen', name: 'Кухня', description: 'Кухонная зона' },
-  { id: 'bedroom', name: 'Спальня', description: 'Спальная комната' },
   { id: 'bathroom', name: 'Ванная', description: 'Санузел' },
 ];
 

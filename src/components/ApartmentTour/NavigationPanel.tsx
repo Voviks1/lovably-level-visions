@@ -67,7 +67,7 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
             <div className="text-xs text-white/80 mb-2">План квартиры</div>
             <div className="relative w-full h-32 bg-white/10 rounded-lg p-2">
               {/* Simplified apartment layout */}
-              <div className="grid grid-cols-3 grid-rows-3 h-full gap-1">
+              <div className="grid grid-cols-3 grid-rows-2 h-full gap-1">
                 <div 
                   className={`rounded border-2 ${
                     currentRoom === 'entrance' ? 'border-white bg-white/20' : 'border-white/40'
@@ -89,7 +89,7 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
                 >
                   <span className="text-xs text-white">В</span>
                 </div>
-                <div className="col-span-2 rounded border-2 border-white/40 flex items-center justify-center">
+                <div className="col-span-3 rounded border-2 border-white/40 flex items-center justify-center">
                   <div 
                     className={`rounded border-2 w-full h-full ${
                       currentRoom === 'living' ? 'border-white bg-white/20' : 'border-white/40'
@@ -97,13 +97,6 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
                   >
                     <span className="text-xs text-white">Гостиная</span>
                   </div>
-                </div>
-                <div 
-                  className={`rounded border-2 ${
-                    currentRoom === 'bedroom' ? 'border-white bg-white/20' : 'border-white/40'
-                  } flex items-center justify-center`}
-                >
-                  <span className="text-xs text-white">С</span>
                 </div>
               </div>
             </div>

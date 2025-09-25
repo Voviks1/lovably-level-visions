@@ -1,10 +1,24 @@
-import React, { useRef, useMemo } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
-import { Html, Sphere, Text } from '@react-three/drei';
-import { Mesh, TextureLoader, SphereGeometry, MeshBasicMaterial, BackSide } from 'three';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
+import { useFrame, useThree, useLoader } from '@react-three/fiber';
+import { Html, Text } from '@react-three/drei';
+import { Mesh, TextureLoader, SphereGeometry, MeshBasicMaterial, BackSide, Texture } from 'three';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Info } from 'lucide-react';
+import { ArrowRight, Info, Loader2 } from 'lucide-react';
 import type { RoomType, ViewMode } from './ApartmentTour';
+
+// Import room images
+import entranceBefore from '@/assets/apartment-tour/entrance/before.jpg';
+import entranceProcess from '@/assets/apartment-tour/entrance/process.jpg';
+import entranceAfter from '@/assets/apartment-tour/entrance/after.jpg';
+import kitchenBefore from '@/assets/apartment-tour/kitchen/before.jpg';
+import kitchenProcess from '@/assets/apartment-tour/kitchen/process.jpg';
+import kitchenAfter from '@/assets/apartment-tour/kitchen/after.jpg';
+import bathroomBefore from '@/assets/apartment-tour/bathroom/before.jpg';
+import bathroomProcess from '@/assets/apartment-tour/bathroom/process.jpg';
+import bathroomAfter from '@/assets/apartment-tour/bathroom/after.jpg';
+import livingBefore from '@/assets/apartment-tour/living/before.jpg';
+import livingProcess from '@/assets/apartment-tour/living/process.jpg';
+import livingAfter from '@/assets/apartment-tour/living/after.jpg';
 
 interface Hotspot {
   position: [number, number, number];
@@ -24,12 +38,12 @@ interface RoomSceneProps {
   onHotspotClick: (roomId: RoomType) => void;
 }
 
-// Mock room configurations
-const roomConfigs = {
+// Room image configurations
+const roomImageConfigs = {
   entrance: {
-    before: '#8B7355', // Brown/beige for unfinished
-    process: '#A68B5B',
-    after: '#F5F5DC', // Cream/beige finished
+    before: entranceBefore,
+    process: entranceProcess,
+    after: entranceAfter,
     hotspots: [
       { position: [0, 0, -0.8], targetRoom: 'living' as RoomType, label: 'В гостиную' },
     ] as Hotspot[],
@@ -39,13 +53,13 @@ const roomConfigs = {
     ] as InfoPoint[],
   },
   living: {
-    before: '#8B7355',
-    process: '#A68B5B', 
-    after: '#E6E6FA', // Light lavender
+    before: livingBefore,
+    process: livingProcess,
+    after: livingAfter,
     hotspots: [
       { position: [0.8, 0, 0.2], targetRoom: 'kitchen' as RoomType, label: 'В кухню' },
       { position: [-0.8, 0, -0.2], targetRoom: 'entrance' as RoomType, label: 'В прихожую' },
-      { position: [0, 0, 0.9], targetRoom: 'bedroom' as RoomType, label: 'В спальню' },
+      { position: [0, 0, 0.9], targetRoom: 'bathroom' as RoomType, label: 'В ванную' },
     ] as Hotspot[],
     infoPoints: [
       { position: [0, 0.4, -0.7], title: 'Потолок', description: 'Многоуровневый натяжной потолок с LED подсветкой' },
@@ -53,9 +67,9 @@ const roomConfigs = {
     ] as InfoPoint[],
   },
   kitchen: {
-    before: '#8B7355',
-    process: '#A68B5B',
-    after: '#F0F8FF', // Alice blue
+    before: kitchenBefore,
+    process: kitchenProcess,
+    after: kitchenAfter,
     hotspots: [
       { position: [-0.8, 0, -0.2], targetRoom: 'living' as RoomType, label: 'В гостиную' },
       { position: [0, 0, 0.9], targetRoom: 'bathroom' as RoomType, label: 'В ванную' },
@@ -65,24 +79,13 @@ const roomConfigs = {
       { position: [-0.4, 0.3, 0.4], title: 'Фартук', description: 'Керамогранит с имитацией мрамора' },
     ] as InfoPoint[],
   },
-  bedroom: {
-    before: '#8B7355',
-    process: '#A68B5B',
-    after: '#FFF8DC', // Cornsilk
-    hotspots: [
-      { position: [0, 0, -0.9], targetRoom: 'living' as RoomType, label: 'В гостиную' },
-    ] as Hotspot[],
-    infoPoints: [
-      { position: [0, 0.4, 0.6], title: 'Изголовье кровати', description: 'Мягкая панель с каретной стяжкой' },
-      { position: [0.7, -0.2, -0.3], title: 'Шкаф-купе', description: 'Встроенный шкаф до потолка' },
-    ] as InfoPoint[],
-  },
   bathroom: {
-    before: '#8B7355',
-    process: '#A68B5B',
-    after: '#F5FFFA', // Mint cream
+    before: bathroomBefore,
+    process: bathroomProcess,
+    after: bathroomAfter,
     hotspots: [
       { position: [0, 0, -0.9], targetRoom: 'kitchen' as RoomType, label: 'В кухню' },
+      { position: [0.8, 0, 0.2], targetRoom: 'living' as RoomType, label: 'В гостиную' },
     ] as Hotspot[],
     infoPoints: [
       { position: [-0.5, 0, 0.5], title: 'Душевая кабина', description: 'Стеклянная кабина с тропическим душем' },
@@ -94,26 +97,48 @@ const roomConfigs = {
 export const RoomScene: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHotspotClick }) => {
   const sphereRef = useRef<Mesh>(null);
   const { camera } = useThree();
+  const [isLoading, setIsLoading] = useState(true);
   
-  const config = roomConfigs[roomType];
-  const currentColor = config[viewMode];
+  const config = roomImageConfigs[roomType];
+  const currentImageUrl = config[viewMode];
 
-  // Create sphere geometry and material
+  // Load texture
+  const texture = useLoader(TextureLoader, currentImageUrl);
+  
+  // Create sphere geometry and material with texture
   const geometry = useMemo(() => new SphereGeometry(1, 32, 32), []);
   const material = useMemo(() => new MeshBasicMaterial({ 
-    color: currentColor,
+    map: texture,
     side: BackSide,
-    transparent: true,
-    opacity: 0.9
-  }), [currentColor]);
+  }), [texture]);
 
-  // Animate color transitions
+  // Handle texture loading
+  useEffect(() => {
+    setIsLoading(true);
+    if (texture) {
+      texture.flipY = false; // Correct orientation for 360 images
+      setIsLoading(false);
+    }
+  }, [texture]);
+
+  // Animate rotation
   useFrame((state) => {
-    if (sphereRef.current) {
+    if (sphereRef.current && !isLoading) {
       const time = state.clock.elapsedTime;
-      material.opacity = 0.8 + Math.sin(time * 0.5) * 0.1;
+      sphereRef.current.rotation.y = time * 0.1;
     }
   });
+
+  if (isLoading) {
+    return (
+      <Html center>
+        <div className="flex items-center space-x-2 text-white">
+          <Loader2 className="w-6 h-6 animate-spin" />
+          <span>Загрузка...</span>
+        </div>
+      </Html>
+    );
+  }
 
   return (
     <>
