@@ -1,7 +1,7 @@
-import React, { useRef, useMemo, useState, useEffect } from 'react';
-import { useFrame, useThree, useLoader } from '@react-three/fiber';
-import { Html, Text } from '@react-three/drei';
-import { Mesh, TextureLoader, SphereGeometry, MeshBasicMaterial, BackSide, Texture } from 'three';
+import React, { useRef, useMemo, useState, useEffect, Suspense } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
+import { Html, Text, useTexture } from '@react-three/drei';
+import { Mesh, SphereGeometry, MeshBasicMaterial, BackSide } from 'three';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Info, Loader2 } from 'lucide-react';
 import type { RoomType, ViewMode } from './ApartmentTour';
@@ -94,74 +94,34 @@ const roomImageConfigs = {
   },
 };
 
-export const RoomScene: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHotspotClick }) => {
+// Room Scene Component that loads and displays textures
+const RoomSceneComponent: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHotspotClick }) => {
   const sphereRef = useRef<Mesh>(null);
-  const { camera } = useThree();
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  
   const config = roomImageConfigs[roomType];
   const currentImageUrl = config[viewMode];
 
-  // Load texture with error handling
-  const texture = useMemo(() => {
-    const loader = new TextureLoader();
-    const tex = loader.load(
-      currentImageUrl,
-      (loadedTexture) => {
-        console.log('Texture loaded successfully:', currentImageUrl);
-        loadedTexture.flipY = false; // Correct orientation for 360 images
-        setIsLoading(false);
-        setError(null);
-      },
-      (progress) => {
-        console.log('Loading progress:', progress);
-      },
-      (err) => {
-        console.error('Error loading texture:', err);
-        setError('Failed to load texture');
-        setIsLoading(false);
-      }
-    );
-    return tex;
-  }, [currentImageUrl]);
+  // Load texture using drei's useTexture hook
+  const texture = useTexture(currentImageUrl);
   
   // Create sphere geometry and material with texture
   const geometry = useMemo(() => new SphereGeometry(10, 64, 32), []);
-  const material = useMemo(() => new MeshBasicMaterial({ 
-    map: texture,
-    side: BackSide,
-  }), [texture]);
+  const material = useMemo(() => {
+    if (texture) {
+      texture.flipY = false; // Correct orientation for 360 images
+      return new MeshBasicMaterial({ 
+        map: texture,
+        side: BackSide,
+      });
+    }
+    return new MeshBasicMaterial({ color: '#333333', side: BackSide });
+  }, [texture]);
 
   // Animate rotation
-  useFrame((state) => {
-    if (sphereRef.current && !isLoading && !error) {
-      const time = state.clock.elapsedTime;
-      sphereRef.current.rotation.y = time * 0.05;
+  useFrame(() => {
+    if (sphereRef.current) {
+      sphereRef.current.rotation.y += 0.002;
     }
   });
-
-  if (error) {
-    return (
-      <Html center>
-        <div className="flex flex-col items-center space-y-2 text-white bg-red-500/20 p-4 rounded">
-          <span>Ошибка загрузки: {error}</span>
-          <span className="text-sm opacity-75">{currentImageUrl}</span>
-        </div>
-      </Html>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <Html center>
-        <div className="flex items-center space-x-2 text-white">
-          <Loader2 className="w-6 h-6 animate-spin" />
-          <span>Загрузка...</span>
-        </div>
-      </Html>
-    );
-  }
 
   return (
     <>
@@ -169,8 +129,8 @@ export const RoomScene: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHots
       <mesh ref={sphereRef} geometry={geometry} material={material} />
 
       {/* Ambient lighting */}
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[1, 1, 1]} intensity={0.4} />
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[1, 1, 1]} intensity={0.5} />
 
       {/* Navigation Hotspots */}
       {config.hotspots.map((hotspot, index) => (
@@ -218,20 +178,19 @@ export const RoomScene: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHots
 
       {/* Room Title */}
       <Text
-        position={[0, 0.8, -0.9]}
-        fontSize={0.1}
+        position={[0, 8, -8]}
+        fontSize={0.8}
         color="white"
         anchorX="center"
         anchorY="middle"
-        font="/fonts/Inter-Bold.woff"
       >
         {roomType.charAt(0).toUpperCase() + roomType.slice(1)}
       </Text>
 
       {/* Mode indicator */}
       <Text
-        position={[0, -0.8, -0.9]}
-        fontSize={0.06}
+        position={[0, -8, -8]}
+        fontSize={0.5}
         color="rgba(255,255,255,0.8)"
         anchorX="center"
         anchorY="middle"
@@ -240,5 +199,20 @@ export const RoomScene: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHots
          viewMode === 'process' ? 'В процессе' : 'После ремонта'}
       </Text>
     </>
+  );
+};
+
+export const RoomScene: React.FC<RoomSceneProps> = (props) => {
+  return (
+    <Suspense fallback={
+      <Html center>
+        <div className="flex items-center space-x-2 text-white">
+          <Loader2 className="w-6 h-6 animate-spin" />
+          <span>Загрузка фотографий...</span>
+        </div>
+      </Html>
+    }>
+      <RoomSceneComponent {...props} />
+    </Suspense>
   );
 };
