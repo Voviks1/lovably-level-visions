@@ -98,36 +98,59 @@ export const RoomScene: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHots
   const sphereRef = useRef<Mesh>(null);
   const { camera } = useThree();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   
   const config = roomImageConfigs[roomType];
   const currentImageUrl = config[viewMode];
 
-  // Load texture
-  const texture = useLoader(TextureLoader, currentImageUrl);
+  // Load texture with error handling
+  const texture = useMemo(() => {
+    const loader = new TextureLoader();
+    const tex = loader.load(
+      currentImageUrl,
+      (loadedTexture) => {
+        console.log('Texture loaded successfully:', currentImageUrl);
+        loadedTexture.flipY = false; // Correct orientation for 360 images
+        setIsLoading(false);
+        setError(null);
+      },
+      (progress) => {
+        console.log('Loading progress:', progress);
+      },
+      (err) => {
+        console.error('Error loading texture:', err);
+        setError('Failed to load texture');
+        setIsLoading(false);
+      }
+    );
+    return tex;
+  }, [currentImageUrl]);
   
   // Create sphere geometry and material with texture
-  const geometry = useMemo(() => new SphereGeometry(1, 32, 32), []);
+  const geometry = useMemo(() => new SphereGeometry(10, 64, 32), []);
   const material = useMemo(() => new MeshBasicMaterial({ 
     map: texture,
     side: BackSide,
   }), [texture]);
 
-  // Handle texture loading
-  useEffect(() => {
-    setIsLoading(true);
-    if (texture) {
-      texture.flipY = false; // Correct orientation for 360 images
-      setIsLoading(false);
-    }
-  }, [texture]);
-
   // Animate rotation
   useFrame((state) => {
-    if (sphereRef.current && !isLoading) {
+    if (sphereRef.current && !isLoading && !error) {
       const time = state.clock.elapsedTime;
-      sphereRef.current.rotation.y = time * 0.1;
+      sphereRef.current.rotation.y = time * 0.05;
     }
   });
+
+  if (error) {
+    return (
+      <Html center>
+        <div className="flex flex-col items-center space-y-2 text-white bg-red-500/20 p-4 rounded">
+          <span>Ошибка загрузки: {error}</span>
+          <span className="text-sm opacity-75">{currentImageUrl}</span>
+        </div>
+      </Html>
+    );
+  }
 
   if (isLoading) {
     return (

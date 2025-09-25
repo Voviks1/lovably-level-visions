@@ -79,7 +79,17 @@ export const ApartmentTour: React.FC = () => {
       )}
 
       {/* 3D Canvas */}
-      <Canvas camera={{ position: [0, 0, 0.1], fov: 75 }}>
+      <Canvas 
+        camera={{ position: [0, 0, 0], fov: 75, near: 0.01, far: 1000 }}
+        gl={{ 
+          preserveDrawingBuffer: true,
+          antialias: true,
+          alpha: false 
+        }}
+        onCreated={({ gl }) => {
+          gl.setClearColor('#000000');
+        }}
+      >
         <Suspense fallback={null}>
           <RoomScene 
             roomType={currentRoom} 
