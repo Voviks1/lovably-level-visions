@@ -102,20 +102,21 @@ const RoomSceneComponent: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHo
 
   return (
     <>
-      {/* Main Photo Display */}
-      <mesh position={[0, 0, -2]}>
-        <planeGeometry args={[8, 6]} />
+      {/* Main Photo Display - Larger and Higher Quality */}
+      <mesh position={[0, 0, -1]}>
+        <planeGeometry args={[12, 9]} />
         <meshBasicMaterial map={texture} />
       </mesh>
 
-      {/* Background */}
-      <mesh position={[0, 0, -5]}>
-        <planeGeometry args={[20, 15]} />
-        <meshBasicMaterial color="#1a1a1a" />
+      {/* Subtle gradient background */}
+      <mesh position={[0, 0, -3]}>
+        <planeGeometry args={[25, 20]} />
+        <meshBasicMaterial color="#f8fafc" />
       </mesh>
 
-      {/* Ambient lighting */}
-      <ambientLight intensity={1.2} />
+      {/* Enhanced ambient lighting */}
+      <ambientLight intensity={1.8} />
+      <directionalLight position={[5, 5, 5]} intensity={0.5} />
 
       {/* Navigation Hotspots */}
       {config.hotspots.map((hotspot, index) => (
