@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Html, Text, useTexture } from '@react-three/drei';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Info, Loader2 } from 'lucide-react';
+import * as THREE from 'three';
 import type { RoomType, ViewMode } from './ApartmentTour';
 
 // Import room images
@@ -43,11 +44,11 @@ const roomImageConfigs = {
     process: entranceProcess,
     after: entranceAfter,
     hotspots: [
-      { position: [3, 1, -1], targetRoom: 'living' as RoomType, label: 'В гостиную' },
+      { position: [4, 1, 2], targetRoom: 'living' as RoomType, label: 'В гостиную' },
     ] as Hotspot[],
     infoPoints: [
-      { position: [-2, 2, -1], title: 'Входная дверь', description: 'Замена на металлическую с утеплением' },
-      { position: [2, -1, -1], title: 'Напольное покрытие', description: 'Укладка ламината премиум класса' },
+      { position: [-4, 2, 1], title: 'Входная дверь', description: 'Замена на металлическую с утеплением' },
+      { position: [3, -1, 2], title: 'Напольное покрытие', description: 'Укладка ламината премиум класса' },
     ] as InfoPoint[],
   },
   living: {
@@ -55,13 +56,13 @@ const roomImageConfigs = {
     process: livingProcess,
     after: livingAfter,
     hotspots: [
-      { position: [3, 0, -1], targetRoom: 'kitchen' as RoomType, label: 'В кухню' },
-      { position: [-3, 0, -1], targetRoom: 'entrance' as RoomType, label: 'В прихожую' },
-      { position: [0, 2, -1], targetRoom: 'bathroom' as RoomType, label: 'В ванную' },
+      { position: [5, 0, 1], targetRoom: 'kitchen' as RoomType, label: 'В кухню' },
+      { position: [-5, 0, 1], targetRoom: 'entrance' as RoomType, label: 'В прихожую' },
+      { position: [0, 3, 3], targetRoom: 'bathroom' as RoomType, label: 'В ванную' },
     ] as Hotspot[],
     infoPoints: [
-      { position: [0, 2.5, -1], title: 'Потолок', description: 'Многоуровневый натяжной потолок с LED подсветкой' },
-      { position: [-2, -1, -1], title: 'Стеновые панели', description: 'Декоративные панели из натурального дерева' },
+      { position: [0, 4, 2], title: 'Потолок', description: 'Многоуровневый натяжной потолок с LED подсветкой' },
+      { position: [-4, -1, 2], title: 'Стеновые панели', description: 'Декоративные панели из натурального дерева' },
     ] as InfoPoint[],
   },
   kitchen: {
@@ -69,12 +70,12 @@ const roomImageConfigs = {
     process: kitchenProcess,
     after: kitchenAfter,
     hotspots: [
-      { position: [-3, 0, -1], targetRoom: 'living' as RoomType, label: 'В гостиную' },
-      { position: [0, 2, -1], targetRoom: 'bathroom' as RoomType, label: 'В ванную' },
+      { position: [-5, 0, 1], targetRoom: 'living' as RoomType, label: 'В гостиную' },
+      { position: [0, 3, 3], targetRoom: 'bathroom' as RoomType, label: 'В ванную' },
     ] as Hotspot[],
     infoPoints: [
-      { position: [2, 0, -1], title: 'Кухонный гарнитур', description: 'Изготовление по индивидуальному проекту' },
-      { position: [-1, 2, -1], title: 'Фартук', description: 'Керамогранит с имитацией мрамора' },
+      { position: [4, 0, 2], title: 'Кухонный гарнитур', description: 'Изготовление по индивидуальному проекту' },
+      { position: [-2, 3, 1], title: 'Фартук', description: 'Керамогранит с имитацией мрамора' },
     ] as InfoPoint[],
   },
   bathroom: {
@@ -82,41 +83,53 @@ const roomImageConfigs = {
     process: bathroomProcess,
     after: bathroomAfter,
     hotspots: [
-      { position: [0, -2, -1], targetRoom: 'kitchen' as RoomType, label: 'В кухню' },
-      { position: [3, 0, -1], targetRoom: 'living' as RoomType, label: 'В гостиную' },
+      { position: [0, -3, 3], targetRoom: 'kitchen' as RoomType, label: 'В кухню' },
+      { position: [5, 0, 1], targetRoom: 'living' as RoomType, label: 'В гостиную' },
     ] as Hotspot[],
     infoPoints: [
-      { position: [-2, 0, -1], title: 'Душевая кабина', description: 'Стеклянная кабина с тропическим душем' },
-      { position: [2, -1, -1], title: 'Плитка', description: 'Керамогранит под натуральный камень' },
+      { position: [-4, 0, 2], title: 'Душевая кабина', description: 'Стеклянная кабина с тропическим душем' },
+      { position: [4, -1, 2], title: 'Плитка', description: 'Керамогранит под натуральный камень' },
     ] as InfoPoint[],
   },
 };
 
-// Room Scene Component that displays photos as planes
+// Room Scene Component with 180-degree high-quality photo display
 const RoomSceneComponent: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHotspotClick }) => {
   const config = roomImageConfigs[roomType];
   const currentImageUrl = config[viewMode];
 
-  // Load texture using drei's useTexture hook
+  // Load texture with high quality settings
   const texture = useTexture(currentImageUrl);
+  
+  // Configure texture for better quality
+  if (texture) {
+    texture.generateMipmaps = false;
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.format = THREE.RGBAFormat;
+  }
 
   return (
     <>
-      {/* Main Photo Display - Larger and Higher Quality */}
-      <mesh position={[0, 0, -1]}>
-        <planeGeometry args={[12, 9]} />
-        <meshBasicMaterial map={texture} />
+      {/* 180-degree curved photo display for immersive experience */}
+      <mesh position={[0, 0, 0]} rotation={[0, 0, 0]}>
+        <cylinderGeometry args={[8, 8, 6, 32, 1, true, 0, Math.PI]} />
+        <meshBasicMaterial 
+          map={texture} 
+          side={THREE.DoubleSide}
+          transparent={false}
+        />
       </mesh>
 
-      {/* Subtle gradient background */}
-      <mesh position={[0, 0, -3]}>
-        <planeGeometry args={[25, 20]} />
-        <meshBasicMaterial color="#f8fafc" />
+      {/* Soft ambient environment */}
+      <mesh position={[0, 0, 0]}>
+        <sphereGeometry args={[15, 16, 16]} />
+        <meshBasicMaterial color="#f1f5f9" side={THREE.BackSide} transparent opacity={0.3} />
       </mesh>
 
-      {/* Enhanced ambient lighting */}
-      <ambientLight intensity={1.8} />
-      <directionalLight position={[5, 5, 5]} intensity={0.5} />
+      {/* Optimal lighting setup */}
+      <ambientLight intensity={1.0} color="#ffffff" />
+      <hemisphereLight args={["#ffffff", "#f8fafc", 0.6]} />
 
       {/* Navigation Hotspots */}
       {config.hotspots.map((hotspot, index) => (
