@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Phone, Mail, MessageCircle, MapPin, Clock, Users } from "lucide-react";
+import { Phone, Mail, MessageCircle, Clock, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -62,16 +66,9 @@ const Contact = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email",
-      content: "info@level-house.ru",
-      action: "mailto:info@level-house.ru",
+      content: "dima01011981@yandex.ru",
+      action: "mailto:dima01011981@yandex.ru",
       actionText: "Написать",
-    },
-    {
-      icon: <MapPin className="w-6 h-6" />,
-      title: "Офис",
-      content: "Москва, ул. Примерная, 123",
-      action: "#",
-      actionText: "На карте",
     },
   ];
 

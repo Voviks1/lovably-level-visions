@@ -1,8 +1,12 @@
+import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Wrench, Palette, Zap, Droplet, Hammer, Star } from "lucide-react";
 
 const Services = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const services = [
     {
       icon: <Hammer className="w-8 h-8" />,
@@ -95,12 +99,6 @@ const Services = () => {
                     {service.description}
                   </p>
                   
-                  <div className="flex justify-between items-center py-3 border-t border-border/50">
-                    <div>
-                      <div className="gold-text font-bold text-lg">{service.price}</div>
-                      <div className="text-sm text-muted-foreground">{service.duration}</div>
-                    </div>
-                  </div>
                   
                   <div>
                     <div className="text-sm font-medium text-foreground mb-2">Включает:</div>
@@ -114,11 +112,6 @@ const Services = () => {
                     </ul>
                   </div>
                   
-                  <Button 
-                    className="w-full bg-gradient-to-r from-primary to-primary-variant hover:from-primary-variant hover:to-primary text-white font-semibold"
-                  >
-                    Узнать подробнее
-                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -135,20 +128,13 @@ const Services = () => {
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Получите бесплатную консультацию и расчет стоимости уже сегодня
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex justify-center">
             <Button 
               size="lg" 
               variant="secondary"
               className="bg-white text-primary hover:bg-white/90 font-semibold"
             >
               Бесплатная консультация
-            </Button>
-            <Button 
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-primary font-semibold"
-            >
-              Рассчитать стоимость
             </Button>
           </div>
         </div>

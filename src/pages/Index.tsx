@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +9,10 @@ import beforeAfterImage from "@/assets/before-after.jpg";
 import { ApartmentTour } from "@/components/ApartmentTour/ApartmentTour";
 
 const Index = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const features = [
     {
       icon: <Star className="w-6 h-6" />,

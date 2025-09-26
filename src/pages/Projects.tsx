@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Eye, Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
+import modernApartmentImg from "@/assets/projects/modern-apartment.jpg";
+import scandinavianHouseImg from "@/assets/projects/scandinavian-house.jpg";
+import minimalistApartmentImg from "@/assets/projects/minimalist-apartment.jpg";
+import classicMansionImg from "@/assets/projects/classic-mansion.jpg";
+import industrialLoftImg from "@/assets/projects/industrial-loft.jpg";
+import ecoHouseImg from "@/assets/projects/eco-house.jpg";
 
 const Projects = () => {
   const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const projects = [
     {
@@ -16,7 +26,7 @@ const Projects = () => {
       area: "85 м²",
       duration: "3 месяца",
       location: "Москва",
-      image: "/api/placeholder/600/400",
+      image: modernApartmentImg,
       description: "Элегантное пространство с элементами лофта и современными решениями",
       year: "2024",
     },
@@ -28,7 +38,7 @@ const Projects = () => {
       area: "120 м²",
       duration: "4 месяца",
       location: "Подмосковье",
-      image: "/api/placeholder/600/400",
+      image: scandinavianHouseImg,
       description: "Уютный дом с натуральными материалами и светлыми тонами",
       year: "2024",
     },
@@ -40,7 +50,7 @@ const Projects = () => {
       area: "65 м²",
       duration: "2 месяца",
       location: "Москва",
-      image: "/api/placeholder/600/400",
+      image: minimalistApartmentImg,
       description: "Функциональное пространство с акцентом на качество материалов",
       year: "2023",
     },
@@ -52,7 +62,7 @@ const Projects = () => {
       area: "200 м²",
       duration: "6 месяцев",
       location: "Москва",
-      image: "/api/placeholder/600/400",
+      image: classicMansionImg,
       description: "Роскошный интерьер с элементами классической архитектуры",
       year: "2023",
     },
@@ -64,7 +74,7 @@ const Projects = () => {
       area: "90 м²",
       duration: "3 месяца",
       location: "Москва",
-      image: "/api/placeholder/600/400",
+      image: industrialLoftImg,
       description: "Промышленная эстетика с современными удобствами",
       year: "2024",
     },
@@ -76,7 +86,7 @@ const Projects = () => {
       area: "150 м²",
       duration: "5 месяцев",
       location: "Подмосковье",
-      image: "/api/placeholder/600/400",
+      image: ecoHouseImg,
       description: "Экологически чистые материалы и энергоэффективные решения",
       year: "2023",
     },
@@ -146,22 +156,17 @@ const Projects = () => {
                 key={project.id} 
                 className="hover-lift border-0 shadow-soft overflow-hidden group cursor-pointer"
               >
-                <div className="relative h-64 bg-gradient-to-br from-muted to-muted/50 overflow-hidden">
+                <div className="relative h-64 overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
                   <div className="absolute bottom-4 left-4 z-20">
                     <Badge variant="secondary" className="bg-white/90 text-foreground">
                       {project.year}
                     </Badge>
-                  </div>
-                  <div className="absolute top-4 right-4 z-20">
-                    <Button
-                      size="sm"
-                      variant="secondary"
-                      className="bg-white/90 hover:bg-white text-foreground opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <Eye className="w-4 h-4 mr-1" />
-                      Посмотреть
-                    </Button>
                   </div>
                 </div>
                 

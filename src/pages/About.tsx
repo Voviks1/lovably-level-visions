@@ -1,32 +1,12 @@
+import { useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Users, Award, Clock, Shield, Star, Lightbulb } from "lucide-react";
 
 const About = () => {
-  const team = [
-    {
-      name: "Александр Петров",
-      role: "Основатель и главный дизайнер",
-      experience: "10+ лет опыта",
-      description: "Создатель концепции Level House. Специализируется на премиальных интерьерах.",
-      image: "/api/placeholder/300/300",
-    },
-    {
-      name: "Мария Иванова",
-      role: "Архитектор-дизайнер",
-      experience: "8+ лет опыта",
-      description: "Эксперт по пространственному планированию и современным стилям.",
-      image: "/api/placeholder/300/300",
-    },
-    {
-      name: "Дмитрий Смирнов",
-      role: "Технический директор",
-      experience: "12+ лет опыта",
-      description: "Отвечает за качество строительных работ и соблюдение сроков.",
-      image: "/api/placeholder/300/300",
-    },
-  ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const values = [
     {
@@ -154,39 +134,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-16 bg-gradient-to-br from-muted/30 to-accent/5">
-        <div className="section-container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Наша команда
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Профессионалы своего дела с многолетним опытом
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <Card key={index} className="hover-lift border-0 shadow-soft overflow-hidden">
-                <div className="h-64 bg-gradient-to-br from-muted to-muted/50"></div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-foreground mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="gold-text font-medium mb-2">{member.role}</p>
-                  <Badge variant="outline" className="mb-3 text-xs">
-                    {member.experience}
-                  </Badge>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {member.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Timeline */}
       <section className="py-16">
