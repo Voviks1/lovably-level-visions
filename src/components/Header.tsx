@@ -53,14 +53,11 @@ export const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             <a
               href="tel:+79058644363"
-              className="flex items-center space-x-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+              className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold text-primary bg-primary/10 hover:bg-primary/20 transition-colors rounded-lg border border-primary/20"
             >
               <Phone className="w-4 h-4" />
               <span>8 (905) 864-43-63</span>
             </a>
-            <Button variant="default" className="bg-gradient-to-r from-accent to-yellow-500 hover:from-yellow-500 hover:to-accent text-accent-foreground font-semibold">
-              Консультация
-            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -93,13 +90,15 @@ export const Header = () => {
               <div className="pt-4 border-t border-white/10">
                 <a
                   href="tel:+79058644363"
-                  className="flex items-center space-x-2 text-sm font-medium text-foreground mb-3"
+                  className="flex items-center space-x-2 text-sm font-semibold text-primary mb-3 p-2 bg-primary/10 rounded-lg"
                 >
                   <Phone className="w-4 h-4" />
                   <span>8 (905) 864-43-63</span>
                 </a>
-                <Button variant="default" className="w-full bg-gradient-to-r from-accent to-yellow-500 text-accent-foreground font-semibold">
-                  Бесплатная консультация
+                <Button variant="default" className="w-full bg-gradient-to-r from-accent to-yellow-500 text-accent-foreground font-semibold" asChild>
+                  <a href="https://wa.me/79058644363?text=Здравствуйте! Хотел бы получить бесплатную консультацию по дизайну интерьера.">
+                    Бесплатная консультация
+                  </a>
                 </Button>
               </div>
             </div>

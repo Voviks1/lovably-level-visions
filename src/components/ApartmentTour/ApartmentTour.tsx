@@ -66,7 +66,13 @@ export const ApartmentTour: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[600px] md:h-[700px] rounded-3xl overflow-hidden bg-gradient-to-br from-muted/30 to-accent/10">
+    <div 
+      className="relative w-full h-[600px] md:h-[700px] rounded-3xl overflow-hidden bg-black"
+      style={{ 
+        touchAction: 'pan-y pinch-zoom',
+        overscrollBehavior: 'contain'
+      }}
+    >
       {/* Loading Screen */}
       {isLoading && (
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary-variant flex items-center justify-center z-50">
@@ -89,6 +95,7 @@ export const ApartmentTour: React.FC = () => {
         onCreated={({ gl }) => {
           gl.setClearColor('#000000');
         }}
+        style={{ touchAction: 'none' }}
       >
         <Suspense fallback={null}>
           <RoomScene 

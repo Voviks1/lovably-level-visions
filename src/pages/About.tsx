@@ -183,22 +183,6 @@ const About = () => {
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Доверьте свой проект профессионалам и получите результат, превосходящий ожидания
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              variant="secondary"
-              className="bg-white text-primary hover:bg-white/90 font-semibold"
-            >
-              Обсудить проект
-            </Button>
-            <Button 
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-primary font-semibold"
-            >
-              Посмотреть портфолио
-            </Button>
-          </div>
         </div>
       </section>
     </div>

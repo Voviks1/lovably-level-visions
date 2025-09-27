@@ -32,10 +32,23 @@ const Contact = () => {
       return;
     }
     
-    // Здесь будет интеграция с API
+    // Создаем сообщение для WhatsApp
+    const message = `Здравствуйте! Хочу оставить заявку на ремонт:
+    
+Имя: ${formData.name}
+Телефон: ${formData.phone}
+${formData.email ? `Email: ${formData.email}` : ''}
+
+Описание проекта:
+${formData.message}`;
+
+    // Открываем WhatsApp с предзаполненным сообщением
+    const whatsappUrl = `https://wa.me/79058644363?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    
     toast({
       title: "Заявка отправлена!",
-      description: "Мы свяжемся с вами в ближайшее время",
+      description: "Мы свяжемся с вами в ближайшее время через WhatsApp",
     });
     
     // Сброс формы
@@ -214,7 +227,11 @@ const Contact = () => {
                             asChild
                             className="hover:bg-primary hover:text-white"
                           >
-                            <a href={info.action}>
+                            <a 
+                              href={info.action}
+                              target={info.action.startsWith('https://t.me/') ? '_blank' : undefined}
+                              rel={info.action.startsWith('https://t.me/') ? 'noopener noreferrer' : undefined}
+                            >
                               {info.actionText}
                             </a>
                           </Button>
@@ -260,8 +277,11 @@ const Contact = () => {
                   <Button
                     size="sm"
                     className="bg-gradient-to-r from-accent to-yellow-500 text-accent-foreground font-semibold"
+                    asChild
                   >
-                    Заказать звонок
+                    <a href="https://wa.me/79058644363?text=Здравствуйте! Хотел бы получить бесплатную консультацию по дизайну интерьера.">
+                      Бесплатная консультация
+                    </a>
                   </Button>
                 </CardContent>
               </Card>

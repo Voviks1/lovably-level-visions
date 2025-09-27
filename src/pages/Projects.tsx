@@ -9,6 +9,22 @@ import minimalistApartmentImg from "@/assets/projects/minimalist-apartment.jpg";
 import classicMansionImg from "@/assets/projects/classic-mansion.jpg";
 import industrialLoftImg from "@/assets/projects/industrial-loft.jpg";
 import ecoHouseImg from "@/assets/projects/eco-house.jpg";
+import sochiSeaApartmentImg from "@/assets/projects/sochi-sea-apartment.jpg";
+import sochiVillaLivingImg from "@/assets/projects/sochi-villa-living.jpg";
+import sochiKitchenModernImg from "@/assets/projects/sochi-kitchen-modern.jpg";
+import sochiBathroomLuxuryImg from "@/assets/projects/sochi-bathroom-luxury.jpg";
+import sochiBedroomCozyImg from "@/assets/projects/sochi-bedroom-cozy.jpg";
+import sochiTerranceMediterraneanImg from "@/assets/projects/sochi-terrace-mediterranean.jpg";
+import sochiOfficeLuxuryImg from "@/assets/projects/sochi-office-luxury.jpg";
+import sochiDiningStylishImg from "@/assets/projects/sochi-dining-stylish.jpg";
+import sochiSpaBathroomImg from "@/assets/projects/sochi-spa-bathroom.jpg";
+import sochiClosetChicImg from "@/assets/projects/sochi-closet-chic.jpg";
+import sochiKidsRoomImg from "@/assets/projects/sochi-kids-room.jpg";
+import sochiHomeTheaterImg from "@/assets/projects/sochi-home-theater.jpg";
+import sochiGymModernImg from "@/assets/projects/sochi-gym-modern.jpg";
+import sochiLibraryElegantImg from "@/assets/projects/sochi-library-elegant.jpg";
+import sochiEntranceContemporaryImg from "@/assets/projects/sochi-entrance-contemporary.jpg";
+import sochiBarLuxuryImg from "@/assets/projects/sochi-bar-luxury.jpg";
 
 const Projects = () => {
   const [filter, setFilter] = useState("all");
@@ -20,6 +36,199 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
+      title: "Квартира с видом на море",
+      category: "apartment", 
+      style: "modern",
+      area: "85 м²",
+      duration: "3 месяца",
+      location: "Сочи",
+      image: sochiSeaApartmentImg,
+      description: "Современная квартира с панорамными окнами и видом на Черное море",
+      year: "2024",
+    },
+    {
+      id: 2,
+      title: "Вилла в современном стиле",
+      category: "house",
+      style: "modern",
+      area: "180 м²",
+      duration: "4 месяца", 
+      location: "Сочи",
+      image: sochiVillaLivingImg,
+      description: "Роскошная вилла с видом на горы и море в престижном районе",
+      year: "2024",
+    },
+    {
+      id: 3,
+      title: "Кухня в стиле модерн",
+      category: "apartment",
+      style: "modern",
+      area: "25 м²",
+      duration: "1 месяц",
+      location: "Сочи", 
+      image: sochiKitchenModernImg,
+      description: "Современная кухня с мраморными столешницами и видом на море",
+      year: "2024",
+    },
+    {
+      id: 4,
+      title: "Ванная в стиле spa",
+      category: "apartment",
+      style: "modern",
+      area: "15 м²",
+      duration: "2 недели",
+      location: "Сочи",
+      image: sochiBathroomLuxuryImg,
+      description: "Роскошная ванная комната в стиле пятизвездочного отеля",
+      year: "2024",
+    },
+    {
+      id: 5,
+      title: "Уютная спальня с видом на море",
+      category: "apartment",
+      style: "modern",
+      area: "20 м²",
+      duration: "3 недели",
+      location: "Сочи",
+      image: sochiBedroomCozyImg,
+      description: "Комфортная спальня в теплых тонах с элементами тропического декора",
+      year: "2024",
+    },
+    {
+      id: 6,
+      title: "Терраса в средиземноморском стиле",
+      category: "house",
+      style: "mediterranean",
+      area: "40 м²",
+      duration: "1 месяц",
+      location: "Сочи",
+      image: sochiTerranceMediterraneanImg,
+      description: "Открытая терраса с мебелью для отдыха и видом на закат",
+      year: "2024",
+    },
+    {
+      id: 7,
+      title: "Офис класса люкс",
+      category: "office",
+      style: "modern",
+      area: "60 м²",
+      duration: "2 месяца",
+      location: "Сочи",
+      image: sochiOfficeLuxuryImg,
+      description: "Современный офис в бизнес-центре с панорамными окнами",
+      year: "2024",
+    },
+    {
+      id: 8,
+      title: "Элегантная столовая",
+      category: "apartment",
+      style: "modern",
+      area: "25 м²",
+      duration: "3 недели",
+      location: "Сочи",
+      image: sochiDiningStylishImg,
+      description: "Стильная обеденная зона с дизайнерской мебелью и люстрой",
+      year: "2024",
+    },
+    {
+      id: 9,
+      title: "SPA-ванная премиум класса",
+      category: "apartment",
+      style: "luxury",
+      area: "30 м²",
+      duration: "1 месяц",
+      location: "Сочи",
+      image: sochiSpaBathroomImg,
+      description: "Домашний спа-центр с джакузи и натуральным камнем",
+      year: "2024",
+    },
+    {
+      id: 10,
+      title: "Гардеробная мечты",
+      category: "apartment",
+      style: "luxury",
+      area: "18 м²",
+      duration: "2 недели",
+      location: "Сочи",
+      image: sochiClosetChicImg,
+      description: "Просторная гардеробная с зеркальными поверхностями",
+      year: "2024",
+    },
+    {
+      id: 11,
+      title: "Детская в морском стиле",
+      category: "apartment",
+      style: "modern",
+      area: "22 м²",
+      duration: "3 недели",
+      location: "Сочи",
+      image: sochiKidsRoomImg,
+      description: "Яркая детская комната с морской тематикой и игровой зоной",
+      year: "2024",
+    },
+    {
+      id: 12,
+      title: "Домашний кинотеатр",
+      category: "house",
+      style: "luxury",
+      area: "35 м²",
+      duration: "1 месяц",
+      location: "Сочи",
+      image: sochiHomeTheaterImg,
+      description: "Профессиональный домашний кинотеатр с кожаными креслами",
+      year: "2024",
+    },
+    {
+      id: 13,
+      title: "Современный спортзал",
+      category: "apartment",
+      style: "modern",
+      area: "40 м²",
+      duration: "3 недели",
+      location: "Сочи",
+      image: sochiGymModernImg,
+      description: "Полностью оборудованный тренажерный зал с видом на море",
+      year: "2024",
+    },
+    {
+      id: 14,
+      title: "Элегантная библиотека",
+      category: "house",
+      style: "classic",
+      area: "45 м²",
+      duration: "1.5 месяца",
+      location: "Сочи",
+      image: sochiLibraryElegantImg,
+      description: "Уютная библиотека с деревянными стеллажами и зоной для чтения",
+      year: "2024",
+    },
+    {
+      id: 15,
+      title: "Современная прихожая",
+      category: "apartment",
+      style: "contemporary",
+      area: "12 м²",
+      duration: "2 недели",
+      location: "Сочи",
+      image: sochiEntranceContemporaryImg,
+      description: "Стильная входная зона с мраморным полом и современным искусством",
+      year: "2024",
+    },
+    {
+      id: 16,
+      title: "Домашний бар",
+      category: "house",
+      style: "luxury",
+      area: "20 м²",
+      duration: "3 недели",
+      location: "Сочи",
+      image: sochiBarLuxuryImg,
+      description: "Роскошная барная зона с винным хранилищем и подсветкой",
+      year: "2024",
+    },
+    // Оригинальные проекты
+    {
+      id: 17,
       title: "Современная квартира в ЖК 'Аврора'",
       category: "apartment",
       style: "modern",
@@ -31,7 +240,7 @@ const Projects = () => {
       year: "2024",
     },
     {
-      id: 2,
+      id: 18,
       title: "Загородный дом в скандинавском стиле",
       category: "house",
       style: "scandinavian",
@@ -43,7 +252,7 @@ const Projects = () => {
       year: "2024",
     },
     {
-      id: 3,
+      id: 19,
       title: "Апартаменты в стиле минимализм",
       category: "apartment",
       style: "minimalist",
@@ -55,7 +264,7 @@ const Projects = () => {
       year: "2023",
     },
     {
-      id: 4,
+      id: 20,
       title: "Классический особняк",
       category: "house",
       style: "classic",
@@ -67,7 +276,7 @@ const Projects = () => {
       year: "2023",
     },
     {
-      id: 5,
+      id: 21,
       title: "Лофт в историческом центре",
       category: "apartment",
       style: "loft",
@@ -79,13 +288,13 @@ const Projects = () => {
       year: "2024",
     },
     {
-      id: 6,
+      id: 22,
       title: "Эко-дом из натуральных материалов",
       category: "house",
       style: "eco",
       area: "150 м²",
       duration: "5 месяцев",
-      location: "Подмосковье",
+      location: "Подмосковье", 
       image: ecoHouseImg,
       description: "Экологически чистые материалы и энергоэффективные решения",
       year: "2023",
@@ -96,9 +305,11 @@ const Projects = () => {
     { id: "all", label: "Все проекты" },
     { id: "apartment", label: "Квартиры" },
     { id: "house", label: "Дома" },
+    { id: "office", label: "Офисы" },
     { id: "modern", label: "Современный" },
     { id: "scandinavian", label: "Скандинавский" },
     { id: "classic", label: "Классика" },
+    { id: "luxury", label: "Люкс" },
     { id: "loft", label: "Лофт" },
   ];
 
@@ -118,7 +329,7 @@ const Projects = () => {
               Наши проекты
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Более 150 успешно реализованных проектов. 
+              Более 200+ успешно реализованных проектов в Сочи и других городах России. 
               Каждый интерьер создается с любовью к деталям и заботой о комфорте наших клиентов.
             </p>
           </div>
@@ -195,7 +406,8 @@ const Projects = () => {
                     
                     <div className="flex flex-wrap gap-2 pt-2">
                       <Badge variant="outline" className="text-xs">
-                        {project.category === "apartment" ? "Квартира" : "Дом"}
+                        {project.category === "apartment" ? "Квартира" : 
+                         project.category === "house" ? "Дом" : "Офис"}
                       </Badge>
                       <Badge variant="outline" className="text-xs">
                         {project.style}
@@ -214,11 +426,11 @@ const Projects = () => {
         <div className="section-container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
             <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">150+</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2">200+</div>
               <div className="text-white/90">Проектов</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">3</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2">4</div>
               <div className="text-white/90">Года опыта</div>
             </div>
             <div>

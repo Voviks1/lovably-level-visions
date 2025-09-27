@@ -71,25 +71,28 @@ const Index = () => {
             Премиум ремонт с 2020 года
           </Badge>
           
-          <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="block">Level House</span>
-            <span className="block text-3xl md:text-5xl font-normal text-white/90 mt-2">
+          <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-6 leading-tight">
+            <span className="block text-center">Level House</span>
+            <span className="block text-2xl sm:text-3xl md:text-5xl font-normal text-white/90 mt-2 text-center">
               Ремонт мечты
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Превращаем пространства в произведения искусства. 
-            Более 150 реализованных проектов премиального качества.
+          <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Создаем роскошные интерьеры, которые вдохновляют каждый день. 
+            Воплощаем самые смелые мечты в реальность с безупречным качеством и стилем.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Button 
               size="lg" 
               className="bg-gradient-to-r from-accent to-yellow-500 hover:from-yellow-500 hover:to-accent text-accent-foreground font-semibold text-lg px-8 py-6"
+              asChild
             >
-              <Calculator className="w-5 h-5 mr-2" />
-              Рассчитать стоимость
+              <a href="https://wa.me/79058644363?text=Здравствуйте! Хотел бы получить бесплатную консультацию по дизайну интерьера.">
+                <Calculator className="w-5 h-5 mr-2" />
+                Бесплатная консультация
+              </a>
             </Button>
             
             <Button 
@@ -149,12 +152,12 @@ const Index = () => {
               </div>
               <div className="flex items-center text-muted-foreground">
                 <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
-                <span className="text-sm">360° обзор</span>
+                <span className="text-sm">180° обзор</span>
               </div>
             </div>
           </div>
           
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto touch-pan-y">
             <ApartmentTour />
           </div>
           
@@ -268,8 +271,7 @@ const Index = () => {
             
             <Button 
               size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-primary font-semibold"
+              className="bg-white text-primary hover:bg-white/90 font-semibold border border-white"
               asChild
             >
               <Link to="/contact">Связаться с нами</Link>
@@ -292,8 +294,11 @@ const Index = () => {
             <Button 
               size="lg" 
               className="bg-gradient-to-r from-accent to-yellow-500 hover:from-yellow-500 hover:to-accent text-accent-foreground font-semibold"
+              asChild
             >
-              Бесплатная консультация
+              <a href="https://wa.me/79058644363?text=Здравствуйте! Хотел бы получить бесплатную консультацию по дизайну интерьера.">
+                Бесплатная консультация
+              </a>
             </Button>
             
             <div className="flex items-center space-x-2 text-muted-foreground">
