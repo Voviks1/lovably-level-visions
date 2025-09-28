@@ -27,7 +27,7 @@ const About = () => {
     {
       icon: <Shield className="w-8 h-8" />,
       title: "Гарантия качества",
-      description: "Предоставляем 3 года гарантии на все виды работ",
+      description: "Предоставляем 1 год гарантии на все виды работ",
     },
     {
       icon: <Lightbulb className="w-8 h-8" />,
@@ -88,8 +88,8 @@ const About = () => {
                 <div className="text-sm text-muted-foreground">Проектов</div>
               </div>
               <div>
-                <div className="text-3xl font-bold gold-text">3</div>
-                <div className="text-sm text-muted-foreground">Года опыта</div>
+                <div className="text-3xl font-bold gold-text">5</div>
+                <div className="text-sm text-muted-foreground">Лет опыта</div>
               </div>
               <div>
                 <div className="text-3xl font-bold gold-text">98%</div>

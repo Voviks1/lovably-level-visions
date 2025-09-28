@@ -21,7 +21,7 @@ const Index = () => {
     },
     {
       icon: <Award className="w-6 h-6" />,
-      title: "3 года гарантии",
+      title: "1 год гарантии",
       description: "На все виды выполняемых работ",
     },
     {
@@ -44,12 +44,12 @@ const Index = () => {
     },
     {
       title: "Капитальный ремонт",
-      price: "от 15 000 ₽/м²",
+      price: "от 30 000 ₽/м²",
       description: "Полная трансформация пространства",
     },
     {
       title: "Чистовая отделка",
-      price: "от 12 000 ₽/м²",
+      price: "от 35 000 ₽/м²",
       description: "Финишные работы премиального качества",
     },
   ];
@@ -83,18 +83,7 @@ const Index = () => {
             Воплощаем самые смелые мечты в реальность с безупречным качеством и стилем.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-accent to-yellow-500 hover:from-yellow-500 hover:to-accent text-accent-foreground font-semibold text-lg px-8 py-6"
-              asChild
-            >
-              <a href="https://wa.me/79058644363?text=Здравствуйте! Хотел бы получить бесплатную консультацию по дизайну интерьера.">
-                <Calculator className="w-5 h-5 mr-2" />
-                Бесплатная консультация
-              </a>
-            </Button>
-            
+          <div className="flex justify-center">
             <Button 
               size="lg" 
               variant="outline"
@@ -254,7 +243,7 @@ const Index = () => {
               </div>
               <h3 className="text-xl font-bold mb-3">Гарантия результата</h3>
               <p className="text-white/90 leading-relaxed">
-                3 года гарантии и полное сопровождение проекта
+                1 год гарантии и полное сопровождение проекта
               </p>
             </div>
           </div>
@@ -276,41 +265,6 @@ const Index = () => {
             >
               <Link to="/contact">Связаться с нами</Link>
             </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-accent/10 to-primary/5">
-        <div className="section-container text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Готовы начать?
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Получите бесплатную консультацию и узнайте стоимость вашего проекта
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-accent to-yellow-500 hover:from-yellow-500 hover:to-accent text-accent-foreground font-semibold"
-              asChild
-            >
-              <a href="https://wa.me/79058644363?text=Здравствуйте! Хотел бы получить бесплатную консультацию по дизайну интерьера.">
-                Бесплатная консультация
-              </a>
-            </Button>
-            
-            <div className="flex items-center space-x-2 text-muted-foreground">
-              <Phone className="w-4 h-4" />
-              <span className="text-sm">Или позвоните:</span>
-              <a 
-                href="tel:+79058644363" 
-                className="font-semibold text-primary hover:text-primary-variant transition-colors"
-              >
-                8 (905) 864-43-63
-              </a>
-            </div>
           </div>
         </div>
       </section>

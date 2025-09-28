@@ -426,12 +426,12 @@ const Projects = () => {
         <div className="section-container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
             <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">200+</div>
-              <div className="text-white/90">Проектов</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2">5</div>
+              <div className="text-white/90">Лет опыта</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">4</div>
-              <div className="text-white/90">Года опыта</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2">5</div>
+              <div className="text-white/90">Лет опыта</div>
             </div>
             <div>
               <div className="text-4xl md:text-5xl font-bold mb-2">98%</div>
