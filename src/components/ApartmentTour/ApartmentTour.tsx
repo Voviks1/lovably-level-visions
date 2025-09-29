@@ -95,7 +95,6 @@ export const ApartmentTour: React.FC = () => {
         onCreated={({ gl }) => {
           gl.setClearColor('#000000');
         }}
-        style={{ touchAction: 'none' }}
       >
         <Suspense fallback={null}>
           <RoomScene 
@@ -105,11 +104,14 @@ export const ApartmentTour: React.FC = () => {
           />
           <OrbitControls
             enablePan={false}
-            enableZoom={true}
-            minDistance={0.1}
-            maxDistance={2}
+            enableZoom={false}
+            enableRotate={true}
             rotateSpeed={0.5}
-            zoomSpeed={0.5}
+            mouseButtons={{
+              LEFT: 0,
+              MIDDLE: 1,
+              RIGHT: 2
+            }}
           />
         </Suspense>
       </Canvas>

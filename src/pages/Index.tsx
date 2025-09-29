@@ -109,9 +109,9 @@ const Index = () => {
       </section>
 
       {/* Interactive 3D Tour Section */}
-      <section className="py-20 bg-gradient-to-br from-muted/30 to-accent/5">
+      <section className="py-4 md:py-8 bg-gradient-to-br from-muted/30 to-accent/5">
         <div className="section-container">
-          <div className="text-center mb-16">
+          <div className="text-center mb-6">
             <h2 className="text-4xl md:text-5xl font-bold hero-text mb-6">
               Интерактивный 3D-тур
             </h2>
