@@ -430,8 +430,8 @@ const Projects = () => {
               <div className="text-white/90">Лет опыта</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">5</div>
-              <div className="text-white/90">Лет опыта</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2">150+</div>
+              <div className="text-white/90">Проектов</div>
             </div>
             <div>
               <div className="text-4xl md:text-5xl font-bold mb-2">98%</div>
