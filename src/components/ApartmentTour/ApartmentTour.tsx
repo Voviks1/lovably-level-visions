@@ -29,6 +29,8 @@ export const ApartmentTour: React.FC = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('before');
   const [isLoading, setIsLoading] = useState(true);
   const [showMinimap, setShowMinimap] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   const getCurrentRoomIndex = () => rooms.findIndex(room => room.id === currentRoom);
   
@@ -57,6 +59,39 @@ export const ApartmentTour: React.FC = () => {
     setViewMode(modes[nextIndex]);
   };
 
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    const modes: ViewMode[] = ['before', 'process', 'after'];
+    const currentIndex = modes.indexOf(viewMode);
+
+    if (isLeftSwipe && currentIndex < modes.length - 1) {
+      // Swipe left - next mode
+      setViewMode(modes[currentIndex + 1]);
+    }
+    
+    if (isRightSwipe && currentIndex > 0) {
+      // Swipe right - previous mode
+      setViewMode(modes[currentIndex - 1]);
+    }
+  };
+
   const currentRoomData = rooms.find(room => room.id === currentRoom)!;
 
   React.useEffect(() => {
@@ -72,6 +107,9 @@ export const ApartmentTour: React.FC = () => {
         touchAction: 'pan-y pinch-zoom',
         overscrollBehavior: 'contain'
       }}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
     >
       {/* Loading Screen */}
       {isLoading && (

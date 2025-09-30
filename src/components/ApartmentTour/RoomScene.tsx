@@ -121,12 +121,6 @@ const RoomSceneComponent: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHo
         />
       </mesh>
 
-      {/* Soft ambient environment */}
-      <mesh position={[0, 0, 0]}>
-        <sphereGeometry args={[15, 16, 16]} />
-        <meshBasicMaterial color="#f1f5f9" side={THREE.BackSide} transparent opacity={0.3} />
-      </mesh>
-
       {/* Optimal lighting setup */}
       <ambientLight intensity={1.0} color="#ffffff" />
       <hemisphereLight args={["#ffffff", "#f8fafc", 0.6]} />
