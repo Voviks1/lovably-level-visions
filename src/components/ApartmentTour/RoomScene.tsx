@@ -111,9 +111,9 @@ const RoomSceneComponent: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHo
 
   return (
     <>
-      {/* 180-degree curved photo display for immersive experience */}
-      <mesh position={[0, 0, 0]} rotation={[0, 0, 0]}>
-        <cylinderGeometry args={[8, 8, 6, 32, 1, true, 0, Math.PI]} />
+      {/* 270-degree curved photo display for immersive experience */}
+      <mesh position={[0, 0, 0]} rotation={[0, Math.PI / 4, 0]}>
+        <cylinderGeometry args={[8, 8, 6, 32, 1, true, 0, Math.PI * 1.5]} />
         <meshBasicMaterial 
           map={texture} 
           side={THREE.DoubleSide}
@@ -184,7 +184,7 @@ const RoomSceneComponent: React.FC<RoomSceneProps> = ({ roomType, viewMode, onHo
       <Text
         position={[0, -8, -8]}
         fontSize={0.5}
-        color="rgba(255,255,255,0.8)"
+        color="#CCCCCC"
         anchorX="center"
         anchorY="middle"
       >

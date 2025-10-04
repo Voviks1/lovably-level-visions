@@ -104,7 +104,7 @@ export const ApartmentTour: React.FC = () => {
     <div 
       className="relative w-full h-[600px] md:h-[700px] rounded-3xl overflow-hidden bg-black"
       style={{ 
-        touchAction: 'pan-y pinch-zoom',
+        touchAction: 'manipulation',
         overscrollBehavior: 'contain'
       }}
       onTouchStart={onTouchStart}
@@ -142,13 +142,15 @@ export const ApartmentTour: React.FC = () => {
           />
           <OrbitControls
             enablePan={false}
-            enableZoom={false}
+            enableZoom={true}
             enableRotate={true}
-            rotateSpeed={0.5}
-            minAzimuthAngle={-Math.PI / 2}
-            maxAzimuthAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-            maxPolarAngle={Math.PI / 2}
+            rotateSpeed={0.8}
+            minAzimuthAngle={-Math.PI / 2.5}
+            maxAzimuthAngle={Math.PI / 2.5}
+            minPolarAngle={Math.PI / 3}
+            maxPolarAngle={Math.PI * 2 / 3}
+            minDistance={5}
+            maxDistance={12}
             mouseButtons={{
               LEFT: 0,
               MIDDLE: 1,
