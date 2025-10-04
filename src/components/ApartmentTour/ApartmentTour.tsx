@@ -145,6 +145,10 @@ export const ApartmentTour: React.FC = () => {
             enableZoom={false}
             enableRotate={true}
             rotateSpeed={0.5}
+            minAzimuthAngle={-Math.PI / 2}
+            maxAzimuthAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+            maxPolarAngle={Math.PI / 2}
             mouseButtons={{
               LEFT: 0,
               MIDDLE: 1,

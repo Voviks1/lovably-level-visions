@@ -129,13 +129,15 @@ const Services = () => {
             Получите бесплатную консультацию и расчет стоимости уже сегодня
           </p>
           <div className="flex justify-center">
-            <Button 
-              size="lg" 
-              variant="secondary"
-              className="bg-white text-primary hover:bg-white/90 font-semibold"
-            >
-              Бесплатная консультация
-            </Button>
+            <a href="tel:+79058644363">
+              <Button 
+                size="lg" 
+                variant="secondary"
+                className="bg-white text-primary hover:bg-white/90 font-semibold"
+              >
+                Бесплатная консультация
+              </Button>
+            </a>
           </div>
         </div>
       </section>

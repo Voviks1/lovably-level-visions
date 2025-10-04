@@ -72,7 +72,7 @@ const Index = () => {
           </Badge>
           
           <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="block text-center">Level House</span>
+            <span className="block text-center">Ровный ремонт</span>
             <span className="block text-2xl sm:text-3xl md:text-5xl font-normal text-white/90 mt-2 text-center">
               Ремонт мечты
             </span>
@@ -101,9 +101,9 @@ const Index = () => {
         </div>
         
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
+        <div className="absolute bottom-12 md:bottom-16 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+          <div className="w-5 h-9 md:w-6 md:h-10 border-2 border-white rounded-full flex justify-center">
+            <div className="w-1 h-2.5 md:h-3 bg-white rounded-full mt-2"></div>
           </div>
         </div>
       </section>
