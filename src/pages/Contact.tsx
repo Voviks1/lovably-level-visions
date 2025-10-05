@@ -264,27 +264,6 @@ ${formData.message}`;
                 </CardContent>
               </Card>
 
-              {/* Quick Stats */}
-              <Card className="border-0 shadow-soft bg-gradient-to-br from-primary/5 to-accent/5">
-                <CardContent className="p-6 text-center">
-                  <Users className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <h3 className="font-bold text-foreground mb-2">
-                    Бесплатная консультация
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Получите профессиональный совет по вашему проекту
-                  </p>
-                  <Button
-                    size="sm"
-                    className="bg-gradient-to-r from-accent to-yellow-500 text-accent-foreground font-semibold"
-                    asChild
-                  >
-                    <a href="https://wa.me/79058644363?text=Здравствуйте! Хотел бы получить бесплатную консультацию по дизайну интерьера.">
-                      Бесплатная консультация
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </div>

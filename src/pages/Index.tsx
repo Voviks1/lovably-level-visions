@@ -73,9 +73,6 @@ const Index = () => {
           
           <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="block text-center">Ровный ремонт</span>
-            <span className="block text-2xl sm:text-3xl md:text-5xl font-normal text-white/90 mt-2 text-center">
-              Ремонт мечты
-            </span>
           </h1>
           
           <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -97,13 +94,6 @@ const Index = () => {
                 <div className="text-sm text-white/80">{feature.description}</div>
               </div>
             ))}
-          </div>
-        </div>
-        
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-12 md:bottom-16 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-          <div className="w-5 h-9 md:w-6 md:h-10 border-2 border-white rounded-full flex justify-center">
-            <div className="w-1 h-2.5 md:h-3 bg-white rounded-full mt-2"></div>
           </div>
         </div>
       </section>
@@ -169,15 +159,9 @@ const Index = () => {
                   <div className="gold-text text-3xl font-bold mb-4">
                     {service.price}
                   </div>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
+                  <p className="text-muted-foreground leading-relaxed">
                     {service.description}
                   </p>
-                  <Button 
-                    variant="outline" 
-                    className="hover:bg-primary hover:text-white"
-                  >
-                    Подробнее
-                  </Button>
                 </CardContent>
               </Card>
             ))}
